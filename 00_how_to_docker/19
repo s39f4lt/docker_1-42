@@ -1,0 +1,4 @@
+docker run -dit --name Abathur -p 3000:3000 --mount type=bind,src=/Users/idunaver,dst=/root python:2-slim
+docker exec Abathur pip install flask
+cd ~ | mkdir flask
+docker exec -w /root/flask/ -e IP='docker inspect --format='{{.NetworkSettings.Networks.IPAddress}}' Abathur' -d Abathur flask run --host=$IP --port=3000
